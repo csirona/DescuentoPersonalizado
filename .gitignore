@@ -1,0 +1,66 @@
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de configuración de entornos virtuales
+.env
+env/
+venv/
+ENV/
+.env.*
+
+# Archivos de la base de datos SQLite
+db.sqlite3
+
+# Archivos de logs
+*.log
+
+# Archivos de migraciones (opcional, si prefieres que se versionen, quita estas líneas)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Directorios de construcción y distribución
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Reportes de cobertura y pruebas
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Documentación y Sphinx
+docs/_build/
+
+# Archivos de IDEs y editores
+.vscode/
+.idea/
+
+# Otros archivos temporales
+*.manifest
+*.spec
