@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Descuento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Descuentos Personalizados</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'discount_list' %}">Descuentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'discount_usage_list' %}">Usos de Descuentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_discount' %}">Crear Descuento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_rut_discount' %}">Rut-Descuento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bulk_create_rut_discount' %}">Ingreso Rut Masivo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="mb-4">Crear Nuevo Descuento</h1>
+
+            <!-- Formulario para crear un descuento -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="code" class="form-label">Código de Descuento:</label>
+                    <input type="text" id="code" name="code" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="expiration_date" class="form-label">Fecha de Expiración:</label>
+                    <input type="date" id="expiration_date" name="expiration_date" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="max_uses" class="form-label">Número Máximo de Usos:</label>
+                    <input type="number" id="max_uses" name="max_uses" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Crear Descuento</button>
+            </form>
+
+            <br>
+            <p><a href="{% url 'home' %}" class="btn btn-link">Volver al inicio</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

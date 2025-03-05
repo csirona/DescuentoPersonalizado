@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historial de Uso de Descuentos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Descuentos Personalizados</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'discount_list' %}">Descuentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'discount_usage_list' %}">Usos de Descuentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_discount' %}">Crear Descuento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_rut_discount' %}">Rut-Descuento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bulk_create_rut_discount' %}">Ingreso Rut Masivo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 class="mt-4">Historial de Uso de Descuentos</h1>
+    
+        <!-- FORMULARIO DE FILTRO -->
+        <form method="GET" class="mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="code" class="form-control" placeholder="Filtrar por código" value="{{ code }}">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="rut" class="form-control" placeholder="Filtrar por rut" value="{{ rut }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+    
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Rut</th>
+                    <th>Código</th>
+                    <th>Número de Boleta</th>
+                    <th>Fecha de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usage in page_obj %}
+                <tr>
+                    <td>{{ usage.rut_discount.rut }}</td>
+                    <td>{{ usage.rut_discount.discount }}</td>
+                    <td>{{ usage.boleta_number }}</td>
+                    <td>{{ usage.used_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No hay resultados</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <!-- PAGINACIÓN -->
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?code={{ code }}&page=1">Primera</a></li>
+                    <li class="page-item"><a class="page-link" href="?code={{ code }}&page={{ page_obj.previous_page_number }}">Anterior</a></li>
+                {% endif %}
+    
+                <li class="page-item disabled"><a class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a></li>
+    
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?code={{ code }}&page={{ page_obj.next_page_number }}">Siguiente</a></li>
+                    <li class="page-item"><a class="page-link" href="?code={{ code }}&page={{ page_obj.paginator.num_pages }}">Última</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    
+    
+</body>
+</html>
