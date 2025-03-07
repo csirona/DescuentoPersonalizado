@@ -34,7 +34,7 @@ def validate_discount(request):
 
             # Verificar si se proporcionó un RUT
             if not rut:
-                return JsonResponse({'valid': False, 'message': 'RUT no proporcionado'}, status=400)
+                return JsonResponse({'valid': False, 'message': 'Codigo no proporcionado'}, status=400)
 
             # Buscar descuentos asociados al RUT
             rut_discount = RutDiscount.objects.filter(
@@ -46,7 +46,7 @@ def validate_discount(request):
 
             # Si no tiene descuentos válidos, rechazar
             if not rut_discount:
-                return JsonResponse({'valid': False, 'message': 'No hay descuentos disponibles para este RUT'}, status=404)
+                return JsonResponse({'valid': False, 'message': 'No hay descuentos disponibles para este Codigo'}, status=404)
 
             # Verificar si el RUT aún puede usar el descuento
             if rut_discount.can_use_discount():
