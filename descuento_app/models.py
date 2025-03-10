@@ -6,6 +6,7 @@ class Discount(models.Model):
     expiration_date = models.DateField()
     state = models.BooleanField(default=True)  # Activo por defecto
     max_uses = models.IntegerField(default=1)  # Número máximo de usos permitidos
+    percentage = models.PositiveIntegerField(default=0)
 
     def is_valid(self):
         """ Verifica si el descuento sigue siendo válido """

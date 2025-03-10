@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Descuento para RUT</title>
-    <!-- Incluir Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Generar Credencial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body class="bg-light">
+<body >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Descuentos Personalizados</a>
@@ -38,34 +37,31 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <h1 class="mb-4">Registrar Descuento para RUT</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-3">
-                {{ form.rut.label_tag }}
-                {{ form.rut }}
-                {% if form.rut.errors %}
-                    <div class="text-danger">
-                        {% for error in form.rut.errors %}
-                            {{ error }}<br>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <div class="mb-3">
-                {{ form.discount.label_tag }}
-                {{ form.discount }}
-                {% if form.discount.errors %}
-                    <div class="text-danger">
-                        {% for error in form.discount.errors %}
-                            {{ error }}<br>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
+    <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+        <div class="card p-4 shadow-sm">
+            <h2 class="text-center">Generar Credencial</h2>
+            
+            <form id="credencialForm">
+                <div class="mb-3">
+                    <label for="rut" class="form-label">Ingrese su RUT:</label>
+                    <input type="text" id="rut" name="rut" class="form-control" placeholder="Ej: 12345678" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Generar Credencial</button>
+            </form>
+            
+            <script>
+                document.getElementById("credencialForm").addEventListener("submit", function(event) {
+                    event.preventDefault();  // Evita el envío normal del formulario
+            
+                    let rut = document.getElementById("rut").value.trim(); // Obtiene el RUT sin espacios
+                    if (rut) {
+                        window.location.href = `/credencial/${rut}/`; // Redirige a la URL correcta
+                    }
+                });
+            </script>
+            
+        </div>
     </div>
+    
 </body>
 </html>

@@ -2,6 +2,7 @@ from django import forms
 from .models import Discount, RutDiscount
 from django.core.exceptions import ValidationError
 
+
 class DiscountValidationForm(forms.Form):
     code = forms.CharField(max_length=50, label="Código de descuento")
 
@@ -14,7 +15,7 @@ class DiscountRegistrationForm(forms.Form):
 class DiscountForm(forms.ModelForm):
     class Meta:
         model = Discount
-        fields = ['code', 'expiration_date', 'max_uses']
+        fields = ['code', 'percentage','expiration_date', 'max_uses']
 
 class RutDiscountForm(forms.ModelForm):
     class Meta:
